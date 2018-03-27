@@ -11,9 +11,10 @@ using System;
 namespace AspNetCoreCC.Migrations
 {
     [DbContext(typeof(IESContext))]
-    partial class IESContextModelSnapshot : ModelSnapshot
+    [Migration("20180315024742_DepartamentoEmailAnotation")]
+    partial class DepartamentoEmailAnotation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,6 +25,10 @@ namespace AspNetCoreCC.Migrations
                 {
                     b.Property<long?>("DepartamentoId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(200);
 
                     b.Property<string>("Nome")
                         .IsRequired()
