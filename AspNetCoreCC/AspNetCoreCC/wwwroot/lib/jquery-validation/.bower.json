@@ -1,9 +1,9 @@
 {
   "name": "jquery-validation",
-  "homepage": "http://jqueryvalidation.org/",
+  "homepage": "https://jqueryvalidation.org/",
   "repository": {
     "type": "git",
-    "url": "git://github.com/jzaefferer/jquery-validation.git"
+    "url": "git://github.com/jquery-validation/jquery-validation.git"
   },
   "authors": [
     "Jörn Zaefferer <joern.zaefferer@gmail.com>"
@@ -32,9 +32,9 @@
   "_resolution": {
     "type": "version",
     "tag": "1.17.0",
-    "commit": "c1343fb9823392aa9acbe1c3ffd337b8c92fed48"
+    "commit": "fc9b12d3bfaa2d0c04605855b896edb2934c0772"
   },
-  "_source": "git://github.com/jzaefferer/jquery-validation.git",
-  "_target": ">=1.8",
+  "_source": "https://github.com/jzaefferer/jquery-validation.git",
+  "_target": "1.17.0",
   "_originalSource": "jquery-validation"
 }

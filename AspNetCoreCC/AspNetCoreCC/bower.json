@@ -3,16 +3,10 @@
   "private": true,
   "dependencies": {
     "bootstrap": "v4.0.0",
-    "jquery": "3.3.1",
-    "jquery-validation": "jquery-validate#1.17.0",
-    "jquery-validation-unobtrusive": "v3.2.9",
-    "Font-Awesome": "5.0.9"
-  },
-  "resolutions": {
-    "bootstrap": "v4.0.0",
-    "Font-Awesome": "5.0.9",
+    "jquery": "3.2.1",
     "jquery-validation": "1.17.0",
-    "jquery": "3.3.1",
-    "jquery-validation-unobtrusive": "v3.2.9"
+    "jquery-validation-unobtrusive": "3.2.6",
+    "datatables": "DataTables#1.10.15",
+    "font-awesome": "Font-Awesome#v4.7.0"
   }
 }
