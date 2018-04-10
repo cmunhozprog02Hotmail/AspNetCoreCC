@@ -141,6 +141,7 @@ namespace AspNetCoreCC.Controllers
         {
             var instituicao = await _context.Instituicoes.SingleOrDefaultAsync(m => m.InstituicaoId == id);
             _context.Instituicoes.Remove(instituicao);
+            TempData["Message"] = "Instituição " + instituicao.Nome.ToUpper() + " foi removida";
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
