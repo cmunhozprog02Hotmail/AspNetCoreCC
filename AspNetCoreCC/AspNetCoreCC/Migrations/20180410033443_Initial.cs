@@ -5,25 +5,25 @@ using System.Collections.Generic;
 
 namespace AspNetCoreCC.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Departamentos",
+                name: "Departamento",
                 columns: table => new
                 {
                     DepartamentoId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(nullable: true)
+                    Nome = table.Column<string>(maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Departamentos", x => x.DepartamentoId);
+                    table.PrimaryKey("PK_Departamento", x => x.DepartamentoId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Instituicoes",
+                name: "Instituicao",
                 columns: table => new
                 {
                     InstituicaoId = table.Column<long>(nullable: false)
@@ -33,17 +33,17 @@ namespace AspNetCoreCC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Instituicoes", x => x.InstituicaoId);
+                    table.PrimaryKey("PK_Instituicao", x => x.InstituicaoId);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Departamentos");
+                name: "Departamento");
 
             migrationBuilder.DropTable(
-                name: "Instituicoes");
+                name: "Instituicao");
         }
     }
 }

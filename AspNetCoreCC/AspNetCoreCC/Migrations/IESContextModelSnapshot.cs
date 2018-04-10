@@ -31,7 +31,7 @@ namespace AspNetCoreCC.Migrations
 
                     b.HasKey("DepartamentoId");
 
-                    b.ToTable("Departamentos");
+                    b.ToTable("Departamento");
                 });
 
             modelBuilder.Entity("AspNetCoreCC.Models.Instituicao", b =>
@@ -45,7 +45,7 @@ namespace AspNetCoreCC.Migrations
 
                     b.HasKey("InstituicaoId");
 
-                    b.ToTable("Instituicoes");
+                    b.ToTable("Instituicao");
                 });
 #pragma warning restore 612, 618
         }

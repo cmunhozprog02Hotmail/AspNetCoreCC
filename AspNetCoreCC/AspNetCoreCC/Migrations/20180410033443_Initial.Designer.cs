@@ -11,8 +11,8 @@ using System;
 namespace AspNetCoreCC.Migrations
 {
     [DbContext(typeof(IESContext))]
-    [Migration("20180315023614_DepartamentoAnnoction")]
-    partial class DepartamentoAnnoction
+    [Migration("20180410033443_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,7 @@ namespace AspNetCoreCC.Migrations
 
                     b.HasKey("DepartamentoId");
 
-                    b.ToTable("Departamentos");
+                    b.ToTable("Departamento");
                 });
 
             modelBuilder.Entity("AspNetCoreCC.Models.Instituicao", b =>
@@ -46,7 +46,7 @@ namespace AspNetCoreCC.Migrations
 
                     b.HasKey("InstituicaoId");
 
-                    b.ToTable("Instituicoes");
+                    b.ToTable("Instituicao");
                 });
 #pragma warning restore 612, 618
         }
