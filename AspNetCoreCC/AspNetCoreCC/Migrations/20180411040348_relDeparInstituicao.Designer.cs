@@ -11,9 +11,10 @@ using System;
 namespace AspNetCoreCC.Migrations
 {
     [DbContext(typeof(IESContext))]
-    partial class IESContextModelSnapshot : ModelSnapshot
+    [Migration("20180411040348_relDeparInstituicao")]
+    partial class relDeparInstituicao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,6 +27,8 @@ namespace AspNetCoreCC.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<long?>("InstituicaoId");
+
+                    b.Property<long?>("IntituicaoId");
 
                     b.Property<string>("Nome")
                         .IsRequired()
