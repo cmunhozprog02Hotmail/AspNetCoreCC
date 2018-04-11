@@ -17,6 +17,9 @@ namespace AspNetCoreCC.Models
         [MaxLength(200, ErrorMessage ="O campo {0} pode conter até {1} caracteres")]
         public string Nome { get; set; }
 
-        
+        public long? IntituicaoId { get; set; }
+        public Instituicao Instituicao { get; set; }
+
+
     }
 }
