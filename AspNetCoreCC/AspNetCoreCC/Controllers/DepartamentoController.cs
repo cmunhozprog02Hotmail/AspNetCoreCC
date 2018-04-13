@@ -46,6 +46,9 @@ namespace AspNetCoreCC.Controllers
         // GET: Departamento/Create
         public IActionResult Create()
         {
+            var instituicoes = _context.Instituicoes.OrderBy(i => i.Nome).ToList();
+            instituicoes.Insert(0, new Instituicao() { InstituicaoId = 0, Nome = "Selecione a Instituição" });
+            ViewBag.Instituicoes = instituicoes;
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace AspNetCoreCC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DepartamentoId,Nome")] Departamento departamento)
+        public async Task<IActionResult> Create([Bind("Nome,InstituicaoId")] Departamento departamento)
         {
             if (ModelState.IsValid)
             {
