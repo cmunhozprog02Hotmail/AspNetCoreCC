@@ -22,7 +22,7 @@ namespace AspNetCoreCC.Controllers
         // GET: Departamento
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Departamentos.ToListAsync());
+            return View(await _context.Departamentos.Include(i => i.Instituicao).OrderBy(c => c.Nome).ToListAsync());
         }
 
         // GET: Departamento/Details/5
