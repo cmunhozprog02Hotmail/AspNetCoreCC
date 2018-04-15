@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace AspNetCoreCC.Models
+namespace Modelo.Cadastros
 {
-    [Table("Instituicao")]
+
     public class Instituicao
     {
         public long? InstituicaoId { get; set; }

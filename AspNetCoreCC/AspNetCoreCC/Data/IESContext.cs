@@ -1,5 +1,6 @@
 ﻿using AspNetCoreCC.Models;
 using Microsoft.EntityFrameworkCore;
+using Modelo.Cadastros;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,11 @@ namespace AspNetCoreCC.Data
 
         
 
-        protected override void OnModelCreating(ModelBuilder modelbuilder)
+        /*protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             base.OnModelCreating(modelbuilder);
             modelbuilder.Entity<Departamento>().ToTable("Departamento");
             modelbuilder.Entity<Instituicao>().ToTable("Instituicao");
-        }
+        }*/
     }
 }
