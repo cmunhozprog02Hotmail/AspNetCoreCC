@@ -33,7 +33,7 @@ namespace AspNetCoreCC.Controllers
                 return NotFound();
             }
 
-            var instituicao = await _context.Instituicoes
+            var instituicao = await _context.Instituicoes.Include(d => d.Departamentos)
                 .SingleOrDefaultAsync(m => m.InstituicaoId == id);
             if (instituicao == null)
             {

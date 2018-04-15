@@ -35,6 +35,7 @@ namespace AspNetCoreCC.Controllers
 
             var departamento = await _context.Departamentos
                 .SingleOrDefaultAsync(m => m.DepartamentoId == id);
+            _context.Instituicoes.Where(i => departamento.InstituicaoId == i.InstituicaoId).Load(); ;
             if (departamento == null)
             {
                 return NotFound();
@@ -81,15 +82,14 @@ namespace AspNetCoreCC.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Instituicoes = new SelectList(_context.Instituicoes.OrderBy(b => b.Nome), "InstituicaoId", "Nome", departamento.InstituicaoId);
+
             return View(departamento);
         }
 
-        // POST: Departamento/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long? id, [Bind("DepartamentoId,Nome")] Departamento departamento)
+        public async Task<IActionResult> Edit(long? id, [Bind("DepartamentoID,Nome, InstituicaoID")] Departamento departamento)
         {
             if (id != departamento.DepartamentoId)
             {
@@ -116,10 +116,16 @@ namespace AspNetCoreCC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Instituicoes = new SelectList(_context.Instituicoes.OrderBy(b => b.Nome), "InstituicaoID", "Nome", departamento.InstituicaoId);
             return View(departamento);
         }
 
-        // GET: Departamento/Delete/5
+        private bool DepartamentoExists(long? id)
+        {
+            return _context.Departamentos.Any(e => e.DepartamentoId == id);
+        }
+
+        // GET: Instituicao/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -129,6 +135,7 @@ namespace AspNetCoreCC.Controllers
 
             var departamento = await _context.Departamentos
                 .SingleOrDefaultAsync(m => m.DepartamentoId == id);
+            _context.Instituicoes.Where(i => departamento.InstituicaoId == i.InstituicaoId).Load(); ;
             if (departamento == null)
             {
                 return NotFound();
@@ -137,20 +144,16 @@ namespace AspNetCoreCC.Controllers
             return View(departamento);
         }
 
-        // POST: Departamento/Delete/5
+        // POST: Instituicao/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long? id)
         {
             var departamento = await _context.Departamentos.SingleOrDefaultAsync(m => m.DepartamentoId == id);
             _context.Departamentos.Remove(departamento);
+            TempData["Message"] = "Departamento " + departamento.Nome.ToUpper() + " foi removido";
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool DepartamentoExists(long? id)
-        {
-            return _context.Departamentos.Any(e => e.DepartamentoId == id);
         }
     }
 }
