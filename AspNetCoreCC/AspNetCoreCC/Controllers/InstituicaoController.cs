@@ -1,46 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreCC.Data;
-using AspNetCoreCC.Models;
+using Modelo.Cadastros;
+using AspNetCoreCC.Data.DAL.Cadastros;
+using System;
 
 namespace AspNetCoreCC.Controllers
 {
     public class InstituicaoController : Controller
     {
         private readonly IESContext _context;
+        private readonly InstituicaoDAL instituicaoDAL;
 
         public InstituicaoController(IESContext context)
         {
             _context = context;
+            instituicaoDAL = new InstituicaoDAL(context);
         }
 
         // GET: Instituicao
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Instituicoes.ToListAsync());
+            return View(await instituicaoDAL.ObterInstituicoesClassificadasPorNome().ToListAsync());
         }
 
-        // GET: Instituicao/Details/5
-        public async Task<IActionResult> Details(long? id)
+        private async Task<IActionResult> ObterVisaoInstituicaoPorId(long? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var instituicao = await _context.Instituicoes
-                .SingleOrDefaultAsync(m => m.InstituicaoId == id);
-            if (instituicao == null)
+            var instituicao = await instituicaoDAL.ObterInstituicaoPorId((
+          long)id); if (instituicao == null)
             {
                 return NotFound();
             }
-
             return View(instituicao);
+        }
+
+        // GET: Instituicao/Details/5
+        public async Task<IActionResult> Details(long? id)
+        {
+            return await ObterVisaoInstituicaoPorId(id);
         }
 
         // GET: Instituicao/Create
@@ -59,7 +62,7 @@ namespace AspNetCoreCC.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(instituicao);
-                await _context.SaveChangesAsync();
+                await instituicaoDAL.GravarInstituicao(instituicao);
                 return RedirectToAction(nameof(Index));
             }
             return View(instituicao);
@@ -68,17 +71,9 @@ namespace AspNetCoreCC.Controllers
         // GET: Instituicao/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var instituicao = await _context.Instituicoes.SingleOrDefaultAsync(m => m.InstituicaoId == id);
-            if (instituicao == null)
-            {
-                return NotFound();
-            }
-            return View(instituicao);
+           
+             return await ObterVisaoInstituicaoPorId(id);
+            
         }
 
         // POST: Instituicao/Edit/5
@@ -97,12 +92,12 @@ namespace AspNetCoreCC.Controllers
             {
                 try
                 {
-                    _context.Update(instituicao);
-                    await _context.SaveChangesAsync();
+                   
+                    await instituicaoDAL.GravarInstituicao(instituicao);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!InstituicaoExists(instituicao.InstituicaoId))
+                    if (! await InstituicaoExists(instituicao.InstituicaoId))
                     {
                         return NotFound();
                     }
@@ -119,19 +114,7 @@ namespace AspNetCoreCC.Controllers
         // GET: Instituicao/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var instituicao = await _context.Instituicoes
-                .SingleOrDefaultAsync(m => m.InstituicaoId == id);
-            if (instituicao == null)
-            {
-                return NotFound();
-            }
-
-            return View(instituicao);
+            return await ObterVisaoInstituicaoPorId(id);
         }
 
         // POST: Instituicao/Delete/5
@@ -139,15 +122,15 @@ namespace AspNetCoreCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long? id)
         {
-            var instituicao = await _context.Instituicoes.SingleOrDefaultAsync(m => m.InstituicaoId == id);
-            _context.Instituicoes.Remove(instituicao);
+            var instituicao = await instituicaoDAL.EliminarInstituicaoPorId((long) id);
+            TempData["Message"] = "Instituição " + instituicao.Nome.ToUpper() + " foi removida";
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool InstituicaoExists(long? id)
+        private async Task<bool>InstituicaoExists(long? id)
         {
-            return _context.Instituicoes.Any(e => e.InstituicaoId == id);
+            return await instituicaoDAL.ObterInstituicaoPorId((long) id) != null; 
         }
     }
 }

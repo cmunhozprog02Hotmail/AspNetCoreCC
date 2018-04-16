@@ -11,10 +11,16 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+    <PackageReference Include="npm" Version="3.5.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modelo\Modelo.csproj" />
   </ItemGroup>
 
 </Project>

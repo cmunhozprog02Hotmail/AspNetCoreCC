@@ -17,13 +17,44 @@ namespace AspNetCoreCC.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
+                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AspNetCoreCC.Models.Departamento", b =>
+            modelBuilder.Entity("Modelo.Cadastros.Curso", b =>
+                {
+                    b.Property<long?>("CursoId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long?>("DepartamentoID");
+
+                    b.Property<string>("Nome");
+
+                    b.HasKey("CursoId");
+
+                    b.HasIndex("DepartamentoID");
+
+                    b.ToTable("Cursos");
+                });
+
+            modelBuilder.Entity("Modelo.Cadastros.CursoDisciplina", b =>
+                {
+                    b.Property<long?>("CursoId");
+
+                    b.Property<long?>("DisciplinaId");
+
+                    b.HasKey("CursoId", "DisciplinaId");
+
+                    b.HasIndex("DisciplinaId");
+
+                    b.ToTable("CursoDisciplina");
+                });
+
+            modelBuilder.Entity("Modelo.Cadastros.Departamento", b =>
                 {
                     b.Property<long?>("DepartamentoId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<long?>("InstituicaoId");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -31,10 +62,24 @@ namespace AspNetCoreCC.Migrations
 
                     b.HasKey("DepartamentoId");
 
+                    b.HasIndex("InstituicaoId");
+
                     b.ToTable("Departamentos");
                 });
 
-            modelBuilder.Entity("AspNetCoreCC.Models.Instituicao", b =>
+            modelBuilder.Entity("Modelo.Cadastros.Disciplina", b =>
+                {
+                    b.Property<long?>("DisciplinaId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nome");
+
+                    b.HasKey("DisciplinaId");
+
+                    b.ToTable("Disciplinas");
+                });
+
+            modelBuilder.Entity("Modelo.Cadastros.Instituicao", b =>
                 {
                     b.Property<long?>("InstituicaoId")
                         .ValueGeneratedOnAdd();
@@ -46,6 +91,53 @@ namespace AspNetCoreCC.Migrations
                     b.HasKey("InstituicaoId");
 
                     b.ToTable("Instituicoes");
+                });
+
+            modelBuilder.Entity("Modelo.Discente.Academico", b =>
+                {
+                    b.Property<long?>("AcademicoId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("Nascimento")
+                        .IsRequired();
+
+                    b.Property<string>("Nome")
+                        .IsRequired();
+
+                    b.Property<string>("RegistroAcademico")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.HasKey("AcademicoId");
+
+                    b.ToTable("Academicos");
+                });
+
+            modelBuilder.Entity("Modelo.Cadastros.Curso", b =>
+                {
+                    b.HasOne("Modelo.Cadastros.Departamento", "Departamento")
+                        .WithMany("Cursos")
+                        .HasForeignKey("DepartamentoID");
+                });
+
+            modelBuilder.Entity("Modelo.Cadastros.CursoDisciplina", b =>
+                {
+                    b.HasOne("Modelo.Cadastros.Curso", "Curso")
+                        .WithMany("CursosDisciplinas")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Modelo.Cadastros.Disciplina", "Disciplina")
+                        .WithMany("CursosDisciplinas")
+                        .HasForeignKey("DisciplinaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Modelo.Cadastros.Departamento", b =>
+                {
+                    b.HasOne("Modelo.Cadastros.Instituicao", "Instituicao")
+                        .WithMany("Departamentos")
+                        .HasForeignKey("InstituicaoId");
                 });
 #pragma warning restore 612, 618
         }
