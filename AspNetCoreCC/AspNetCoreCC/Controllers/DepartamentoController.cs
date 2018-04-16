@@ -20,9 +20,9 @@ namespace AspNetCoreCC.Controllers
         }
 
         // GET: Departamento
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Departamentos.ToListAsync());
+            return View(_context.Departamentos.ToListAsync());
         }
 
         // GET: Departamento/Details/5
