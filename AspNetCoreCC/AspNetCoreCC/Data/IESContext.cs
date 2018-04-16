@@ -1,6 +1,7 @@
 ﻿using AspNetCoreCC.Models;
 using Microsoft.EntityFrameworkCore;
 using Modelo.Cadastros;
+using Modelo.Discente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace AspNetCoreCC.Data
         public DbSet<Departamento> Departamentos { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
+        public DbSet<Academico> Academicos { get; set; }
 
 
 
