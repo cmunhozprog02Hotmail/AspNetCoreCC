@@ -7,7 +7,7 @@ using Modelo.Cadastros;
 using AspNetCoreCC.Data.DAL.Cadastros;
 using System;
 
-namespace AspNetCoreCC.Controllers
+namespace AspNetCoreCC.Areas.Cadastros.Controllers
 {
     public class InstituicaoController : Controller
     {

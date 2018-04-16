@@ -7,7 +7,7 @@ using AspNetCoreCC.Data;
 using Modelo.Cadastros;
 using AspNetCoreCC.Data.DAL.Cadastros;
 
-namespace AspNetCoreCC.Controllers
+namespace AspNetCoreCC.Areas.Cadastros.Controllers
 {
     public class DepartamentoController : Controller
     {

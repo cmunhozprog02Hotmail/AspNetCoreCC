@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Modelo.Discente;
 using System.Threading.Tasks;
 
-namespace Capitulo02.Controllers
+namespace AspNetCoreCC.Areas.Cadastros.Controllers
 {
     public class AcademicoController : Controller
     {

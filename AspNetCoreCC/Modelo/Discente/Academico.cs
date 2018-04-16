@@ -10,7 +10,7 @@ namespace Modelo.Discente
         public long? AcademicoId { get; set; }
 
         [StringLength(10, MinimumLength = 10)]
-        [RegularExpression("[0-9] {10}")]
+        
         [Required] public string RegistroAcademico { get; set; }
 
         [Required] public string Nome { get; set; }
