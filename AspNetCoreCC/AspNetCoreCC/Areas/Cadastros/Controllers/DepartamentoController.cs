@@ -9,6 +9,7 @@ using AspNetCoreCC.Data.DAL.Cadastros;
 
 namespace AspNetCoreCC.Areas.Cadastros.Controllers
 {
+    [Area("Cadastros")]
     public class DepartamentoController : Controller
     {
         private readonly IESContext _context;
@@ -58,13 +59,15 @@ namespace AspNetCoreCC.Areas.Cadastros.Controllers
         {
             ViewResult visaoDepartamento = (ViewResult)await ObterVisaoDepartamentoPorId(id);
             Departamento departamento = (Departamento)visaoDepartamento.Model;
-            ViewBag.Instituicoes = new SelectList(instituicaoDAL.ObterInstituicoesClassificadasPorNome(), "InstituicaoId", "Nome", departamento.InstituicaoId);
+            ViewBag.Instituicoes = new SelectList
+                (instituicaoDAL.ObterInstituicoesClassificadasPorNome(),
+                "InstituicaoId", "Nome", departamento.InstituicaoId);
             return visaoDepartamento;
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long? id, [Bind("DepartamentoId,Nome, InstituicaoID")] Departamento departamento)
+        public async Task<IActionResult> Edit(long? id, [Bind("DepartamentoId,Nome,InstituicaoId")] Departamento departamento)
         {
             if (id != departamento.DepartamentoId)
             {

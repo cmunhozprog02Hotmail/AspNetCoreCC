@@ -8,26 +8,21 @@ namespace AspNetCoreCC.Data.DAL.Cadastros
     public class InstituicaoDAL
     {
         private IESContext _context;
-       
-
-        //Usada no Details, Edit e Delete
-        
 
         public InstituicaoDAL(IESContext context)
         {
             _context = context;
-           
-            
         }
 
         public IQueryable<Instituicao> ObterInstituicoesClassificadasPorNome()
         {
-            return _context.Instituicoes.OrderBy(i => i.Nome);
+            return _context.Instituicoes.OrderBy(b => b.Nome);
         }
 
         public async Task<Instituicao> ObterInstituicaoPorId(long id)
         {
-            return await _context.Instituicoes.Include(d => d.Departamentos).SingleOrDefaultAsync(m => m.InstituicaoId == id);
+            return await _context.Instituicoes.Include(d => d.Departamentos)
+                .SingleOrDefaultAsync(m => m.InstituicaoId == id);
         }
 
         public async Task<Instituicao> GravarInstituicao(Instituicao instituicao)
@@ -46,12 +41,11 @@ namespace AspNetCoreCC.Data.DAL.Cadastros
 
         public async Task<Instituicao> EliminarInstituicaoPorId(long id)
         {
-            Instituicao instituicao = await ObterInstituicaoPorId(id); _context.Instituicoes.Remove(instituicao);
+            Instituicao instituicao = await ObterInstituicaoPorId(id);
+            _context.Instituicoes.Remove(instituicao);
             await _context.SaveChangesAsync();
             return instituicao;
         }
-
-
 
     }
 }

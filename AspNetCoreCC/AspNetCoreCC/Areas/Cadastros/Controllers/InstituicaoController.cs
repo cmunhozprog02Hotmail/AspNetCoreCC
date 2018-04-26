@@ -9,6 +9,7 @@ using System;
 
 namespace AspNetCoreCC.Areas.Cadastros.Controllers
 {
+    [Area("Cadastros")]
     public class InstituicaoController : Controller
     {
         private readonly IESContext _context;
@@ -32,8 +33,8 @@ namespace AspNetCoreCC.Areas.Cadastros.Controllers
             {
                 return NotFound();
             }
-            var instituicao = await instituicaoDAL.ObterInstituicaoPorId((
-          long)id); if (instituicao == null)
+            var instituicao = await instituicaoDAL.ObterInstituicaoPorId((long)id);
+            if (instituicao == null)
             {
                 return NotFound();
             }
@@ -57,13 +58,20 @@ namespace AspNetCoreCC.Areas.Cadastros.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("InstituicaoId,Nome,Endereco")] Instituicao instituicao)
+        public async Task<IActionResult> Create([Bind("Nome,Endereco")] Instituicao instituicao)
         {
-            if (ModelState.IsValid)
+            
+            try
             {
-                _context.Add(instituicao);
+                if (ModelState.IsValid)
+            {
                 await instituicaoDAL.GravarInstituicao(instituicao);
                 return RedirectToAction(nameof(Index));
+            }
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Não foi possível inserir os dados.");
             }
             return View(instituicao);
         }
@@ -92,7 +100,6 @@ namespace AspNetCoreCC.Areas.Cadastros.Controllers
             {
                 try
                 {
-                   
                     await instituicaoDAL.GravarInstituicao(instituicao);
                 }
                 catch (DbUpdateConcurrencyException)

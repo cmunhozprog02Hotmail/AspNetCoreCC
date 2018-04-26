@@ -1,0 +1,11 @@
+﻿@model Modelo.Cadastros.Instituicao
+
+<div class="card-body">
+    @Html.Partial("~/Areas/Cadastros/Views/Departamento/_PartialDetailsContentCard.cs html", Model)
+</div>
+
+<div class="col-3">
+    @Html.Partial("~/Areas/Cadastros/Views/Instituicao/_ComDepartamentos.cshtml", Model.Departamentos.ToList())
+</div>
+
+

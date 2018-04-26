@@ -1,4 +1,4 @@
-﻿@model AspNetCoreCC.Models.Instituicao
+﻿@model Modelo.Cadastros.Instituicao
 
 @{
     Layout = "_LayoutIES";
@@ -41,5 +41,7 @@
         </form>
     </div>
 </div>
- @section ScriptPage { @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
-} }
+ @section ScriptPage { 
+     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+     }

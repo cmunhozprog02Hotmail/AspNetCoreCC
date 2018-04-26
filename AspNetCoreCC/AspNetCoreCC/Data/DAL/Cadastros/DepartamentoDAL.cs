@@ -18,12 +18,12 @@ namespace AspNetCoreCC.Data.DAL.Cadastros
 
         public IQueryable<Departamento> ObterDepartamentosClassificadosPorNome()
         {
-            return _context.Departamentos.OrderBy(b => b.Nome);
+            return _context.Departamentos.Include(i => i.Instituicao).OrderBy(b => b.Nome);
         }
 
         public async Task<Departamento> ObterDepartamentoPorId(long id)
         {
-            var departamento = await _context.Departamentos.SingleOrDefaultAsync(m => m.InstituicaoId == id);
+            var departamento = await _context.Departamentos.SingleOrDefaultAsync(m => m.DepartamentoId == id);
             _context.Instituicoes.Where(i => departamento.InstituicaoId == i.InstituicaoId).Load(); ;
             return departamento;
         }
@@ -32,7 +32,9 @@ namespace AspNetCoreCC.Data.DAL.Cadastros
         {
             if (departamento.DepartamentoId == null)
             {
+                
                 _context.Departamentos.Add(departamento);
+                
             }
             else
             {

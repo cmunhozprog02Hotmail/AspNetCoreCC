@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreCC.Areas.Cadastros.Controllers
 {
+    [Area("Discente")]
     public class AcademicoController : Controller
     {
         private readonly IESContext _context;

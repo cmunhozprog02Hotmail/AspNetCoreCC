@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace AspNetCoreCC.Data
 {
@@ -27,6 +28,7 @@ namespace AspNetCoreCC.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
 
             modelBuilder.Entity<CursoDisciplina>()
                 .HasKey(cd => new { cd.CursoId, cd.DisciplinaId });
@@ -40,7 +42,9 @@ namespace AspNetCoreCC.Data
                 .HasOne(d => d.Disciplina)
                 .WithMany(cd => cd.CursosDisciplinas)
                 .HasForeignKey(d => d.DisciplinaId);
+
             
+
         }
     }
 }
