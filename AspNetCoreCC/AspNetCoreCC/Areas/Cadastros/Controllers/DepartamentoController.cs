@@ -38,7 +38,7 @@ namespace AspNetCoreCC.Areas.Cadastros.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome, InstituicaoID")] Departamento departamento)
+        public async Task<IActionResult> Create([Bind("Nome, InstituicaoId")] Departamento departamento)
         {
             try
             {
